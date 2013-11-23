@@ -1,0 +1,25 @@
+{
+    "name": "jakubonderka/php-console-highlighter",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jakub Onderka",
+            "email": "acci@acci.cz",
+            "homepage": "http://www.acci.cz/"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"JakubOnderka\\PhpConsoleHighlighter": "src/"}
+    },
+    "require": {
+        "php": ">=5.3.0",
+        "kevinlebrun/colors.php": "0.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "jakub-onderka/php-parallel-lint": "v0.3",
+        "squizlabs/php_codesniffer": "1.*"
+    }
+}
