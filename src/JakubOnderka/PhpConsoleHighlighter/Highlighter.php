@@ -14,9 +14,26 @@ class Highlighter
     /** @var Color */
     private $color;
 
-    public function __construct(Color $color)
+    /** @var array */
+    private $theme = array(
+        self::TOKEN_STRING => 'red',
+        self::TOKEN_COMMENT => 'yellow',
+        self::TOKEN_KEYWORD => 'green',
+        self::TOKEN_DEFAULT => 'white',
+        self::TOKEN_HTML => 'cyan'
+    );
+
+    /**
+     * @param Color $color
+     * @param array|null $theme
+     */
+    public function __construct(Color $color, array $theme = null)
     {
         $this->color = $color;
+
+        if ($theme) {
+            $this->setTheme($theme);
+        }
     }
 
     /**
@@ -56,6 +73,22 @@ class Highlighter
     {
         $tokenLines = $this->getHighlightedLines($source);
         return $this->output($tokenLines);
+    }
+
+    /**
+     * @return array
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * @param array $theme
+     */
+    public function setTheme(array $theme)
+    {
+        $this->theme = $theme;
     }
 
     /**
@@ -175,7 +208,12 @@ class Highlighter
         foreach ($tokenLines as $lineCount => $tokenLine) {
             $line = '';
             foreach ($tokenLine as $token) {
-                $line .= $this->color->apply($token[0], $token[1]);
+                list($tokenType, $tokenValue) = $token;
+                if (isset($this->theme[$tokenType])) {
+                    $line .= $this->color->apply($this->theme[$tokenType], $tokenValue);
+                } else {
+                    $line .= $tokenValue;
+                }
             }
             $lines[$lineCount] = $line;
         }
