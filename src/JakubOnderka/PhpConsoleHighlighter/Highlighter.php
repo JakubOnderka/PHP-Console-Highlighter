@@ -5,11 +5,11 @@ use Colors\Color;
 
 class Highlighter
 {
-    const TOKEN_DEFAULT = 'd',
-        TOKEN_COMMENT = 'c',
-        TOKEN_STRING = 's',
-        TOKEN_HTML = 'h',
-        TOKEN_KEYWORD = 'k';
+    const TOKEN_DEFAULT = 'token_default',
+        TOKEN_COMMENT = 'token_comment',
+        TOKEN_STRING = 'token_string',
+        TOKEN_HTML = 'token_html',
+        TOKEN_KEYWORD = 'token_keyword';
 
     /** @var Color */
     private $color;
