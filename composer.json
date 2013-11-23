@@ -1,6 +1,6 @@
 {
     "name": "jakub-onderka/php-console-highlighter",
-    "version": "1.0.0",
+    "version": "0.1",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -19,7 +19,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
-        "jakub-onderka/php-parallel-lint": "v0.3",
+        "jakub-onderka/php-parallel-lint": "0.4",
         "squizlabs/php_codesniffer": "1.*"
     }
 }
