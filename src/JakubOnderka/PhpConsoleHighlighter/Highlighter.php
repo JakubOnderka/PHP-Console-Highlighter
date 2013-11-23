@@ -41,7 +41,7 @@ class Highlighter
 
         $snippet = '';
         foreach ($lines as $i => $line) {
-            $snippet .= ($lineNumber === $i + 1 ? $this->color->apply('red','  > ') : '    ');
+            $snippet .= ($lineNumber === $i + 1 ? $this->color->apply('red', '  > ') : '    ');
             $snippet .= str_pad($i + 1, $lineStrlen, ' ', STR_PAD_LEFT) . '| ' . rtrim($line) . PHP_EOL;
         }
 
