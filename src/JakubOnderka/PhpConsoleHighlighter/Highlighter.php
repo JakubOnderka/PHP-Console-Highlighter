@@ -37,7 +37,7 @@ class Highlighter
         $lines = $this->colorLines($tokenLines);
 
         end($lines);
-        $lineStrlen = strlen(key($lines));
+        $lineStrlen = strlen(key($lines) + 1);
 
         $snippet = '';
         foreach ($lines as $i => $line) {
