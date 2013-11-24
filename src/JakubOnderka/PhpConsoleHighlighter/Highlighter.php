@@ -48,6 +48,7 @@ class Highlighter
         $tokenLines = $this->getHighlightedLines($source);
 
         $offset = $lineNumber - $linesBefore - 1;
+        $offset = max($offset, 0);
         $length = $linesAfter + $linesBefore + 1;
         $tokenLines = array_slice($tokenLines, $offset, $length, $preserveKeys = true);
 
