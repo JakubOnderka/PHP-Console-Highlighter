@@ -1,7 +1,7 @@
 <?php
 namespace JakubOnderka\PhpConsoleHighlighter;
 
-use Colors\Color;
+use JakubOnderka\PhpConsoleColor\ConsoleColor;
 
 class Highlighter
 {
@@ -11,11 +11,11 @@ class Highlighter
         TOKEN_HTML = 'token_html',
         TOKEN_KEYWORD = 'token_keyword';
 
-    /** @var Color */
+    /** @var ConsoleColor */
     private $color;
 
     /** @var array */
-    private $theme = array(
+    private $defaultTheme = array(
         self::TOKEN_STRING => 'red',
         self::TOKEN_COMMENT => 'yellow',
         self::TOKEN_KEYWORD => 'green',
@@ -24,15 +24,16 @@ class Highlighter
     );
 
     /**
-     * @param Color $color
-     * @param array|null $theme
+     * @param ConsoleColor $color
      */
-    public function __construct(Color $color, array $theme = null)
+    public function __construct(ConsoleColor $color)
     {
         $this->color = $color;
 
-        if ($theme) {
-            $this->setTheme($theme);
+        foreach ($this->defaultTheme as $name => $styles) {
+            if (!$this->color->hasTheme($name)) {
+                $this->color->addTheme($name, $styles);
+            }
         }
     }
 
@@ -42,6 +43,8 @@ class Highlighter
      * @param int $linesBefore
      * @param int $linesAfter
      * @return string
+     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \InvalidArgumentException
      */
     public function getCodeSnippet($source, $lineNumber, $linesBefore = 2, $linesAfter = 2)
     {
@@ -69,27 +72,13 @@ class Highlighter
     /**
      * @param string $source
      * @return string
+     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \InvalidArgumentException
      */
     public function getWholeFile($source)
     {
         $tokenLines = $this->getHighlightedLines($source);
         return $this->output($tokenLines);
-    }
-
-    /**
-     * @return array
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * @param array $theme
-     */
-    public function setTheme(array $theme)
-    {
-        $this->theme = $theme;
     }
 
     /**
@@ -140,9 +129,18 @@ class Highlighter
                     case T_CLOSE_TAG:
                     case T_STRING:
                     case T_VARIABLE:
+
+                    // Constants
                     case T_DIR:
+                    case T_FILE:
+                    case T_METHOD_C:
                     case T_DNUMBER:
                     case T_LNUMBER:
+                    case T_NS_C:
+                    case T_LINE:
+                    case T_CLASS_C:
+                    case T_FUNC_C:
+                    case T_TRAIT_C:
                         $newType = self::TOKEN_DEFAULT;
                         break;
 
@@ -200,8 +198,11 @@ class Highlighter
         return $lines;
     }
 
-    /** @param array $tokenLines
+    /**
+     * @param array $tokenLines
      * @return array
+     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \InvalidArgumentException
      */
     private function colorLines(array $tokenLines)
     {
@@ -210,8 +211,8 @@ class Highlighter
             $line = '';
             foreach ($tokenLine as $token) {
                 list($tokenType, $tokenValue) = $token;
-                if (isset($this->theme[$tokenType])) {
-                    $line .= $this->color->apply($this->theme[$tokenType], $tokenValue);
+                if ($this->color->hasTheme($tokenType)) {
+                    $line .= $this->color->apply($tokenType, $tokenValue);
                 } else {
                     $line .= $tokenValue;
                 }
@@ -225,6 +226,8 @@ class Highlighter
     /**
      * @param array $tokenLines
      * @return string
+     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \InvalidArgumentException
      */
     private function output(array $tokenLines)
     {
