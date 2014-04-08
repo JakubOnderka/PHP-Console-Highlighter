@@ -11,6 +11,8 @@ class Highlighter
         TOKEN_HTML = 'token_html',
         TOKEN_KEYWORD = 'token_keyword';
 
+    const ACTUAL_LINE_MARK = 'actual_line_mark';
+
     /** @var ConsoleColor */
     private $color;
 
@@ -20,7 +22,9 @@ class Highlighter
         self::TOKEN_COMMENT => 'yellow',
         self::TOKEN_KEYWORD => 'green',
         self::TOKEN_DEFAULT => 'white',
-        self::TOKEN_HTML => 'cyan'
+        self::TOKEN_HTML => 'cyan',
+
+        self::ACTUAL_LINE_MARK  => 'red',
     );
 
     /**
@@ -62,7 +66,7 @@ class Highlighter
 
         $snippet = '';
         foreach ($lines as $i => $line) {
-            $snippet .= ($lineNumber === $i + 1 ? $this->color->apply('red', '  > ') : '    ');
+            $snippet .= ($lineNumber === $i + 1 ? $this->color->apply(self::ACTUAL_LINE_MARK, '  > ') : '    ');
             $snippet .= str_pad($i + 1, $lineStrlen, ' ', STR_PAD_LEFT) . '| ' . rtrim($line) . PHP_EOL;
         }
 
