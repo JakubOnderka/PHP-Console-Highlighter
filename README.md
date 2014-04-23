@@ -3,6 +3,10 @@ PHP-Console-Highlighter
 
 Highlight PHP code in terminal
 
+Example
+-------
+![Example](http://jakubonderka.github.io/php-console-highlight-example.png)
+
 Install
 -------
 
