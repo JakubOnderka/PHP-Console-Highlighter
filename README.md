@@ -1,7 +1,7 @@
-PHP-Console-Highlighter
+PHP Console Highlighter
 =======================
 
-Highlight PHP code in terminal
+Highlight PHP code in console (terminal). 
 
 Example
 -------
