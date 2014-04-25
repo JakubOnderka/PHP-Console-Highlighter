@@ -11,7 +11,8 @@ class Highlighter
         TOKEN_HTML = 'token_html',
         TOKEN_KEYWORD = 'token_keyword';
 
-    const ACTUAL_LINE_MARK = 'actual_line_mark';
+    const ACTUAL_LINE_MARK = 'actual_line_mark',
+        LINE_NUMBER = 'line_number';
 
     /** @var ConsoleColor */
     private $color;
@@ -25,6 +26,7 @@ class Highlighter
         self::TOKEN_HTML => 'cyan',
 
         self::ACTUAL_LINE_MARK  => 'red',
+        self::LINE_NUMBER => 'dark_gray',
     );
 
     /**
@@ -61,16 +63,7 @@ class Highlighter
 
         $lines = $this->colorLines($tokenLines);
 
-        end($lines);
-        $lineStrlen = strlen(key($lines) + 1);
-
-        $snippet = '';
-        foreach ($lines as $i => $line) {
-            $snippet .= ($lineNumber === $i + 1 ? $this->color->apply(self::ACTUAL_LINE_MARK, '  > ') : '    ');
-            $snippet .= str_pad($i + 1, $lineStrlen, ' ', STR_PAD_LEFT) . '| ' . rtrim($line) . PHP_EOL;
-        }
-
-        return $snippet;
+        return $this->lineNumbers($lines, $lineNumber);
     }
 
     /**
@@ -82,7 +75,21 @@ class Highlighter
     public function getWholeFile($source)
     {
         $tokenLines = $this->getHighlightedLines($source);
-        return $this->output($tokenLines);
+        $lines = $this->colorLines($tokenLines);
+        return implode(PHP_EOL, $lines) . PHP_EOL;
+    }
+
+    /**
+     * @param string $source
+     * @return string
+     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \InvalidArgumentException
+     */
+    public function getWholeFileWithLineNumbers($source)
+    {
+        $tokenLines = $this->getHighlightedLines($source);
+        $lines = $this->colorLines($tokenLines);
+        return $this->lineNumbers($lines);
     }
 
     /**
@@ -233,13 +240,26 @@ class Highlighter
     }
 
     /**
-     * @param array $tokenLines
+     * @param array $lines
+     * @param null|int $markLine
      * @return string
      * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
-     * @throws \InvalidArgumentException
      */
-    private function output(array $tokenLines)
+    private function lineNumbers(array $lines, $markLine = null)
     {
-        return implode("\n", $this->colorLines($tokenLines));
+        end($lines);
+        $lineStrlen = strlen(key($lines) + 1);
+
+        $snippet = '';
+        foreach ($lines as $i => $line) {
+            if ($markLine !== null) {
+                $snippet .= ($markLine === $i + 1 ? $this->color->apply(self::ACTUAL_LINE_MARK, '  > ') : '    ');
+            }
+
+            $snippet .= $this->color->apply(self::LINE_NUMBER, str_pad($i + 1, $lineStrlen, ' ', STR_PAD_LEFT) . '| ');
+            $snippet .= $line . PHP_EOL;
+        }
+
+        return $snippet;
     }
 }
