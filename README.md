@@ -1,7 +1,7 @@
 PHP Console Highlighter
 =======================
 
-Highlight PHP code in console (terminal). 
+Highlight PHP code in console (terminal).
 
 Example
 -------
@@ -31,6 +31,6 @@ require __DIR__ . '/vendor/autoload.php';
 
 $highlighter = new Highlighter(new ConsoleColor());
 
-$fileContent = file_get_contents(__DIR__ . '/example.php');
-echo $highlighter->getWholeFile($fileContent) . PHP_EOL;
+$fileContent = file_get_contents(__FILE__);
+echo $highlighter->getWholeFile($fileContent);
 ```
