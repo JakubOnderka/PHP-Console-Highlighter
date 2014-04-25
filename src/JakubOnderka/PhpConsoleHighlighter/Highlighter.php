@@ -76,7 +76,7 @@ class Highlighter
     {
         $tokenLines = $this->getHighlightedLines($source);
         $lines = $this->colorLines($tokenLines);
-        return implode(PHP_EOL, $lines) . PHP_EOL;
+        return implode(PHP_EOL, $lines);
     }
 
     /**
