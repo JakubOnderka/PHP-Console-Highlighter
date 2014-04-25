@@ -78,7 +78,7 @@
         <delete dir="${basedir}/build/coverage" quiet="true" />
         <mkdir dir="${basedir}/build/coverage" />
 
-        <exec executable="${phpunit}">
+        <exec executable="${phpunit}" failonerror="true">
             <arg line='--configuration ${basedir}/phpunit.xml' />
             <arg line='-d memory_limit=256M' />
             <arg line='--log-junit "${basedir}/build/logs/phpunit.xml"' />
