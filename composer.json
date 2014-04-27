@@ -1,6 +1,5 @@
 {
     "name": "jakub-onderka/php-console-highlighter",
-    "version": "0.3",
     "type": "library",
     "license": "MIT",
     "authors": [
