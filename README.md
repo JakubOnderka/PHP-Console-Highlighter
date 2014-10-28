@@ -34,3 +34,7 @@ $highlighter = new Highlighter(new ConsoleColor());
 $fileContent = file_get_contents(__FILE__);
 echo $highlighter->getWholeFile($fileContent);
 ```
+
+------
+
+[![Build Status](https://travis-ci.org/JakubOnderka/PHP-Console-Highlighter.svg?branch=master)](https://travis-ci.org/JakubOnderka/PHP-Console-Highlighter)
