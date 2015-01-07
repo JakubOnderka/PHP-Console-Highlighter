@@ -180,7 +180,9 @@ class Highlighter
             $buffer .= is_array($token) ? $token[1] : $token;
         }
 
-        $output[] = array($newType, $buffer);
+        if (isset($newType)) {
+            $output[] = array($newType, $buffer);
+        }
 
         return $output;
     }
