@@ -5,10 +5,14 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - 7.0
+
+matrix:
+  allowed_failures:
+    - php: 7.0
 
 before_script:
-  - composer self-update
-  - composer install --no-interaction --prefer-source --dev
+  - composer install --no-interaction --prefer-source
 
 script:
   - ant phplint
