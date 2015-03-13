@@ -15,6 +15,4 @@ before_script:
   - composer install --no-interaction --prefer-source
 
 script:
-  - ant phplint
-  - ant phpcs
-  - ant phpunit
+  - ant
