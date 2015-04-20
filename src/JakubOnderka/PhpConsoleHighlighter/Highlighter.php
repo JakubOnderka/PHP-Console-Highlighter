@@ -22,7 +22,7 @@ class Highlighter
         self::TOKEN_STRING => 'red',
         self::TOKEN_COMMENT => 'yellow',
         self::TOKEN_KEYWORD => 'green',
-        self::TOKEN_DEFAULT => 'white',
+        self::TOKEN_DEFAULT => 'default',
         self::TOKEN_HTML => 'cyan',
 
         self::ACTUAL_LINE_MARK  => 'red',
