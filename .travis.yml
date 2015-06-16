@@ -9,7 +9,7 @@ php:
   - hhvm
 
 matrix:
-  allowed_failures:
+  allow _failures:
     - php: 7.0
 
 before_script:
