@@ -10,7 +10,7 @@
         }
     ],
     "autoload": {
-        "psr-0": {"JakubOnderka\\PhpConsoleHighlighter": "src/"}
+        "psr-4": {"JakubOnderka\\PhpConsoleHighlighter\\": "src/"}
     },
     "require": {
         "php": ">=5.3.0",
