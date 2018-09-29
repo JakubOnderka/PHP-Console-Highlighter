@@ -1,5 +1,6 @@
 {
     "name": "jakub-onderka/php-console-highlighter",
+    "description": "Highlight PHP code in terminal",
     "type": "library",
     "license": "MIT",
     "authors": [
