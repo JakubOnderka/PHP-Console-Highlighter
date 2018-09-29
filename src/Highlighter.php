@@ -119,20 +119,6 @@ class Highlighter
         foreach ($tokens as $token) {
             if (is_array($token)) {
                 switch ($token[0]) {
-                    case T_INLINE_HTML:
-                        $newType = self::TOKEN_HTML;
-                        break;
-
-                    case T_COMMENT:
-                    case T_DOC_COMMENT:
-                        $newType = self::TOKEN_COMMENT;
-                        break;
-
-                    case T_ENCAPSED_AND_WHITESPACE:
-                    case T_CONSTANT_ENCAPSED_STRING:
-                        $newType = self::TOKEN_STRING;
-                        break;
-
                     case T_WHITESPACE:
                         break;
 
@@ -156,6 +142,20 @@ class Highlighter
                         $newType = self::TOKEN_DEFAULT;
                         break;
 
+                    case T_COMMENT:
+                    case T_DOC_COMMENT:
+                        $newType = self::TOKEN_COMMENT;
+                        break;
+
+                    case T_ENCAPSED_AND_WHITESPACE:
+                    case T_CONSTANT_ENCAPSED_STRING:
+                        $newType = self::TOKEN_STRING;
+                        break;
+
+                    case T_INLINE_HTML:
+                        $newType = self::TOKEN_HTML;
+                        break;
+
                     default:
                         $newType = self::TOKEN_KEYWORD;
                 }
@@ -167,7 +167,7 @@ class Highlighter
                 $currentType = $newType;
             }
 
-            if ($currentType != $newType) {
+            if ($currentType !== $newType) {
                 $output[] = array($currentType, $buffer);
                 $buffer = '';
                 $currentType = $newType;
