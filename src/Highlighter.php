@@ -31,6 +31,7 @@ class Highlighter
 
     /**
      * @param ConsoleColor $color
+     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
      */
     public function __construct(ConsoleColor $color)
     {
