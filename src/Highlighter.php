@@ -151,17 +151,12 @@ class Highlighter
                     case T_LINE:
                     case T_CLASS_C:
                     case T_FUNC_C:
-                    //case T_TRAIT_C:
+                    case T_TRAIT_C:
                         $newType = self::TOKEN_DEFAULT;
                         break;
 
                     default:
-                        // Compatibility with PHP 5.3
-                        if (defined('T_TRAIT_C') && $token[0] === T_TRAIT_C) {
-                            $newType = self::TOKEN_DEFAULT;
-                        } else {
-                            $newType = self::TOKEN_KEYWORD;
-                        }
+                        $newType = self::TOKEN_KEYWORD;
                 }
             } else {
                 $newType = $token === '"' ? self::TOKEN_STRING : self::TOKEN_KEYWORD;
