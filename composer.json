@@ -15,11 +15,11 @@
     "require": {
         "php": ">=5.4.0",
         "ext-tokenizer": "*",
-        "jakub-onderka/php-console-color": "~0.1"
+        "jakub-onderka/php-console-color": "~0.2"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
-        "jakub-onderka/php-parallel-lint": "~0.5",
+        "jakub-onderka/php-parallel-lint": "~1.0",
         "jakub-onderka/php-var-dump-check": "~0.1",
         "squizlabs/php_codesniffer": "~1.5",
         "jakub-onderka/php-code-style": "~1.0"
