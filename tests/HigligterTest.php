@@ -262,4 +262,13 @@ EOL
             ''
         );
     }
+
+    public function testWhitespace()
+    {
+        $this->compare(
+            ' '
+            ,
+            '<token_html> </token_html>'
+        );
+    }
 }
