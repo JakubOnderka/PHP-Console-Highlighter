@@ -1,6 +1,12 @@
 PHP Console Highlighter
 =======================
 
+**This repository is abandoned.**
+
+Suggested alternative: https://github.com/php-parallel-lint/PHP-Console-Highlighter
+
+------
+
 Highlight PHP code in console (terminal).
 
 Example

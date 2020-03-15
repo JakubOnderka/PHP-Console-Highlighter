@@ -24,5 +24,6 @@
         "jakub-onderka/php-var-dump-check": "~0.1",
         "squizlabs/php_codesniffer": "~1.5",
         "jakub-onderka/php-code-style": "~1.0"
-    }
+    },
+    "abandoned": "php-parallel-lint/php-console-highlighter"
 }
